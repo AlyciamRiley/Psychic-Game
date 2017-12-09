@@ -1,85 +1,78 @@
+// Declare variables
+//=======================================================================
+var computerChoices = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+var wins = 0;
+var losses = 0;
+//var letterIndex = ;
+var guessesRemaining = 9;
+var lettersGuessed = [];
+var computerGuess = 0;
 
 
-// declare variablessss
+
+//Functions
+//===========================================================================
+
+function startGame() {
+    computerGuess =
+        computerChoices[Math.floor(Math.random() * computerChoices.length)];
 
 
+    //reset
+    guessesLeft = 9;
+    lettersGuessed = "";
+};
 
-// 1. Computer must generate random letter
+function gameContinues() {
+    //user inputs guess 
+    document.onkeyup = function () {
+        var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
 
+        console.log(userGuess);
 
-    var computerChoices = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
-    var wins = 0;
-    var losses = 0;
-    //var letterIndex = ;
-    var guessesRemaining = 9;
-    
-    
+        //user guess is compared to computer guess            
 
-newRound();
+        if ((userGuess != computerGuess)) {
+            alert("Try again!");
+            guessesRemaining--;
+            document.getElementById("guessesRemaining").innerHTML = guessesRemaining;
 
-   
-function newRound() {
-//1
-    var computerGuess = 
-     computerChoices[Math.floor(Math.random() * computerChoices.length)];
-     console.log(computerGuess);
+        }
 
+        if ((userGuess == computerGuess)) {
+            alert("You chose correctly!");
+            wins++;
+            document.getElementById("winCounter").innerHTML = wins;
 
-// 2. User must choose first letter 
-
-
-document.onkeyup = function(event) {
-    var userGuess = 
-        String.fromCharCode(event.keyCode).toLowerCase();
-
-    console.log(userGuess);
-  
-//var winsContainer = document.getElementById('wins);
-
-// 3. Compare first guess with computer guess
+        }0
+        //guesses remaining counter goes down by 1 with each key input           
+        if ((guessesRemaining == 0)) {
+            alert("game over");
+            losses++;
+            document.getElementById("lossCounter").innterHTML = losses;
 
 
-    if ((userGuess == computerGuess)) {
-        alert("You win!");
-        wins++;
-        
-    } else {
-        alert("Try again!");
+        }
+
     }
-
-}
-
-   
-    
-newRound(); 
-}
-   
+    console.log(computerGuess);
+//setting floor- when it hits floor, starts over (validation)
 
 
+};
+
+//checking / debugging
+//====================================================================================
 
 
-    // a. If it's correct
-        // wins goes up by 1 
-        //code starts over
-    // b. If its incorrect
-        // User guess is logged under "Letters Guessed"
-            //letterIndex++
-        // Number of guesses remaining goes down by 1
+//Main Process - function is called
+//==================================================================
+startGame();
+gameContinues();
 
-    
-
+//HTML updates to reflect changes
+//====================================================================
+document.getElementById("lettersGuessed").innerHTML = lettersGuessed;
 
 
-// 4. Code repeats 9 times
-// 5. If user doesn't guess within 9 guesses    
-    // losses goes up by 1
-    // Code starts over
-
-
-
-
-
-
-
-    
 

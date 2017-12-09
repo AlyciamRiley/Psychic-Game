@@ -9,76 +9,20 @@
 <body>
     <h1>The Psychic Game</h1>
     <div id="game">
-
         <p>Guess which letter I'm thinking!</p>
+        <p>Letters Guessed:<span id="lettersGuessed"></span></p>
+        
+        <p>Guesses remaining:<span id="guessesRemaining"></span></p>
+            
+        <p>Wins:<span id="winCounter"></span></p>
+        <p>Losses:<span id="lossCounter"></span></p>
+            
     </div>
 
-    <script type="text/javascript">
-        //Use getElementByID to link to  jss page instead of having ll code in 1 page.
-        // Declare variables
-
-
-        var computerChoices = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-        var wins = 0;
-        var losses = 0;
-        //var letterIndex = ;
-        var guessesRemaining = 9;
-
-
-        // Computer must generate random letter
-        var computerGuess =
-            computerChoices[Math.floor(Math.random() * computerChoices.length)];
-
-        console.log(computerGuess);
-
-
-        //User must choose first letter 
-
-
-        document.onkeyup = function() {
-            var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
-            console.log(userGuess);
-
-            //How to show chosen letters on gui? 
-
-
-            // Compare first guess with computer guess
-
-
-            if ((userGuess == computerGuess)) {
-                alert("You chose correctly!");
-                wins++;
-                computerGuess =
-                    computerChoices[Math.floor(Math.random() * computerChoices.length)];
-
-            }
-
-            //Why is it showing try again after win?
-            //need to generate new number
-
-            if (guessesRemaining == 0) {
-                alert("game over");
-                losses++;
-                guessesRemaining = 9;
-                computerGuess =
-                    computerChoices[Math.floor(Math.random() * computerChoices.length)];
-
-            } //How to pick a new letter?
-
-            if (userGuess != computerGuess) {
-                alert("Try again!");
-                guessesRemaining--;
-
-            }
-
-            var html = "<p>Guess which letter I'm thinking!</p>" +
-                "<p>Wins: " + wins + "</p>" +
-                "<p>Losses: " + losses + "</p>" +
-                "<p>Guesses Remaining: " + guessesRemaining + "</p>";
-
-            document.querySelector('#game').innerHTML = html;
-        };
+    <script src="assets/javascript/game.js">
+    
     </script>
+        
 </body>
 
 </html>
