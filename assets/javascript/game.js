@@ -3,9 +3,9 @@
 var computerChoices = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 var wins = 0;
 var losses = 0;
-//var letterIndex = ;
+var userGuess = 0;
 var guessesRemaining = 9;
-var lettersGuessed = [];
+var wrongGuesses = [];
 var computerGuess = 0;
 
 
@@ -14,65 +14,91 @@ var computerGuess = 0;
 //===========================================================================
 
 function startGame() {
+    //random letter is chosed
     computerGuess =
         computerChoices[Math.floor(Math.random() * computerChoices.length)];
+    console.log(computerGuess);
 
+    //reset guesses back to 9
+    guessesRemaining = 9;
 
-    //reset
-    guessesLeft = 9;
-    lettersGuessed = "";
+    //updates HTML to reflect reset
+    document.getElementById("guessesRemaining").innerHTML = guessesRemaining;
+
+    //wrong guesses are cleared
+    wrongGuesses = [];
+
+    //updates HTML to reflect reset
+    document.getElementById("lettersGuessed").innerHTML = wrongGuesses;
+
 };
 
-function gameContinues() {
+function checkResults() {
+
     //user inputs guess 
     document.onkeyup = function () {
-        var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+        userGuess = String.fromCharCode(event.keyCode).toLowerCase();
 
-        console.log(userGuess);
 
-        //user guess is compared to computer guess            
 
-        if ((userGuess != computerGuess)) {
-            alert("Try again!");
+
+        //user guess is compared to computer guess      
+
+        //incorrect guess
+        if (userGuess != computerGuess) {
+            alert("Try again!"); 
+
+            //update number of guesses remaining
             guessesRemaining--;
-            document.getElementById("guessesRemaining").innerHTML = guessesRemaining;
+            document.getElementById("guessesRemaining").innerHTML = guessesRemaining; 
+
+
+
+            //update letters guessed
+            wrongGuesses.push(userGuess);
+
+            document.getElementById("lettersGuessed").innerHTML =
+                wrongGuesses; 
+
+
+            //testing
+            console.log(userGuess);
+
+        } else if ((userGuess == computerGuess)) {
+            alert("You chose correctly!");
+            //update win counter
+            wins++;
+            //update html
+            document.getElementById("winCounter").innerHTML = wins;
+            //restart game
+            startGame();
+            console.log(userGuess);
 
         }
 
-        if ((userGuess == computerGuess)) {
-            alert("You chose correctly!");
-            wins++;
-            document.getElementById("winCounter").innerHTML = wins;
 
-        }0
+
         //guesses remaining counter goes down by 1 with each key input           
         if ((guessesRemaining == 0)) {
             alert("game over");
             losses++;
             document.getElementById("lossCounter").innterHTML = losses;
 
+        }
 
+        if (guessesRemaining == 0) {
+            startGame();
         }
 
     }
-    console.log(computerGuess);
-//setting floor- when it hits floor, starts over (validation)
 
 
-};
+}
 
-//checking / debugging
-//====================================================================================
+
 
 
 //Main Process - function is called
 //==================================================================
 startGame();
-gameContinues();
-
-//HTML updates to reflect changes
-//====================================================================
-document.getElementById("lettersGuessed").innerHTML = lettersGuessed;
-
-
-
+checkResults();
