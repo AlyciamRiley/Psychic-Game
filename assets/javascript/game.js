@@ -51,9 +51,7 @@ function checkResults() {
             //update number of guesses remaining
             guessesRemaining--;
             document.getElementById("guessesRemaining").innerHTML = guessesRemaining; 
-
-
-
+        
             //update letters guessed
             wrongGuesses.push(userGuess);
 
@@ -79,17 +77,15 @@ function checkResults() {
 
 
         //guesses remaining counter goes down by 1 with each key input           
-        if ((guessesRemaining == 0)) {
+        if (guessesRemaining == 0) {
             alert("game over");
             losses++;
-            document.getElementById("lossCounter").innterHTML = losses;
-
-        }
-
-        if (guessesRemaining == 0) {
+            document.getElementById("lossCounter").innerHTML = losses;
             startGame();
+
         }
 
+     
     }
 
 
